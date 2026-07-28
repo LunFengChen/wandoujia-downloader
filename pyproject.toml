@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wandoujia-downloader"
+version = "0.2.0"
+description = "Search, list, download, and verify historical APKs from Wandoujia"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "aiohttp>=3.10,<4",
+]
+
+[project.scripts]
+wandoujia-downloader = "wandoujia_downloader.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.urls]
+Repository = "https://github.com/LunFengChen/wandoujia-downloader"

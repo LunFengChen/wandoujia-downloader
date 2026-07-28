@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/LunFengChen/wandoujia-downloader/schemas/manifest-v1.schema.json",
+  "title": "Wandoujia downloader evidence manifest v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "generatedAt",
+    "provider",
+    "input",
+    "resolvedAppUrl",
+    "historyUrl",
+    "warnings",
+    "summary",
+    "artifacts"
+  ],
+  "properties": {
+    "schema": { "const": "wandoujia-downloader.manifest.v1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "provider": { "const": "wandoujia" },
+    "input": { "type": "string" },
+    "resolvedAppUrl": { "type": "string", "format": "uri" },
+    "historyUrl": { "type": "string", "format": "uri" },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "summary": {
+      "type": "object",
+      "required": ["requested", "saved", "existing", "failed"],
+      "properties": {
+        "requested": { "type": "integer", "minimum": 0 },
+        "saved": { "type": "integer", "minimum": 0 },
+        "existing": { "type": "integer", "minimum": 0 },
+        "failed": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "status",
+          "path",
+          "size",
+          "sha256",
+          "md5",
+          "archive_valid",
+          "package_name",
+          "version",
+          "version_code",
+          "source_detail_url",
+          "source_download_url",
+          "source_download_url_sha256",
+          "expected_size",
+          "expected_md5",
+          "expected_crc32",
+          "min_sdk",
+          "error"
+        ],
+        "properties": {
+          "status": { "enum": ["saved", "existing", "failed"] },
+          "path": { "type": ["string", "null"] },
+          "size": { "type": ["integer", "null"], "minimum": 0 },
+          "sha256": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+          "md5": { "type": ["string", "null"], "pattern": "^[0-9a-f]{32}$" },
+          "archive_valid": { "type": "boolean" },
+          "package_name": { "type": ["string", "null"] },
+          "version": { "type": ["string", "null"] },
+          "version_code": { "type": ["string", "null"] },
+          "source_detail_url": { "type": "string", "format": "uri" },
+          "source_download_url": { "type": "string", "format": "uri" },
+          "source_download_url_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "expected_size": { "type": ["integer", "null"], "minimum": 0 },
+          "expected_md5": { "type": ["string", "null"], "pattern": "^[0-9a-f]{32}$" },
+          "expected_crc32": { "type": ["string", "null"] },
+          "min_sdk": { "type": ["string", "null"] },
+          "error": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}
